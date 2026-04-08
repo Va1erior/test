@@ -1,34 +1,60 @@
-//1.1
-console.log("1printArray:");    
+/**
+ * Выводит элементы массива в консоль в формате "Element N: value X"
+ * @param {Array} array - Исходный массив
+ * @returns {void}
+ */
 function printArray(array) {
-    if (!Array.isArray(array)) {
-        console.log("Input is not an array.");
-        return;
-    }
-
-    for (const element of array) {
-        console.log(element);
-    }
+  for (let i = 0; i < array.length; i++) {
+    console.log(`Element ${i}: value ${array[i]}`);
+  }
 }
 
-printArray([1, 2, 3, 4, 5]);
+/**
+ * Выводит элементы массива в консоль в формате "N: X"
+ * @param {Array} array - Исходный массив
+ * @returns {void}
+ */
+function printArray1(array) {
+  for (let i = 0; i < array.length; i++) {
+    console.log(`${i}:  ${array[i]}`);
+  }
+}
 
-//1.2
-console.log("1.2forEach:");
+/**
+ * Выполняет переданный колбэк для каждого элемента массива.
+ * @param {Array} array - Исходный массив
+ * @param {function(*, number, Array): void} callback - Функция, вызываемая для каждого элемента.
+ *   Принимает: текущий элемент, индекс, весь массив.
+ * @returns {void}
+ */
 function forEach(array, callback) {
+  if (!Array.isArray(array)) {
+    throw new TypeError("Первый аргумент должен быть массивом");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("Второй аргумент должен быть функцией");
+  }
+
   for (let i = 0; i < array.length; i++) {
     callback(array[i], i, array);
   }
 }
 
-forEach([2, 4,9], (element, index, array) => {
-  console.log(`Element: ${element}, Index: ${index}`);
-});
-
-
-//2
-console.log("2map:");
+/**
+ * Создаёт новый массив, содержащий результаты вызова колбэка для каждого элемента.
+ * @param {Array} array - Исходный массив
+ * @param {function(*, number, Array): *} callback - Функция преобразования.
+ *   Принимает: текущий элемент, индекс, весь массив. Возвращает новое значение.
+ * @returns {Array} Новый массив с преобразованными элементами
+ */
 function map(array, callback) {
+  if (!Array.isArray(array)) {
+    throw new TypeError("Первый аргумент должен быть массивом");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("Второй аргумент должен быть функцией");
+  }
+
   const result = [];
   for (let i = 0; i < array.length; i++) {
     result.push(callback(array[i], i, array));
@@ -36,104 +62,172 @@ function map(array, callback) {
   return result;
 }
 
-const numbers = [1, 2, 3];
-const squared = map(numbers, (element) => element * element);
-console.log(squared); 
-
-
-//3
-console.log("3filter:");
+/**
+ * Формирует новый массив из элементов, для которых колбэк вернул true.
+ * @param {Array} array - Исходный массив
+ * @param {function(*, number, Array): boolean} callback - Функция-предикат.
+ *   Принимает: текущий элемент, индекс, весь массив. Возвращает boolean.
+ * @returns {Array} Новый массив с отфильтрованными элементами
+ */
 function filter(array, callback) {
-  const result = [];    
-    for (let i = 0; i < array.length; i++) {
-        if (callback(array[i], i, array)) {
-            if (callback(array[i], i, array)){
-                result.push(array[i]);
-            }
-        }
-    }   
-    return result;
-}
-const numbers2 = [1, 2, 3, 4, 5];
-const evenNumbers = filter(numbers2, (element) => element % 2 === 0);
-console.log(evenNumbers); 
+  if (!Array.isArray(array)) {
+    throw new TypeError("Первый аргумент должен быть массивом");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("Второй аргумент должен быть функцией");
+  }
 
-//4
-console.log("4find:"); 
+  const result = [];
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i], i, array)) {
+      result.push(array[i]);
+    }
+  }
+  return result;
+}
+
+/**
+ * Возвращает первый элемент массива, для которого колбэк вернул true.
+ * @param {Array} array - Исходный массив
+ * @param {function(*, number, Array): boolean} callback - Функция-предикат.
+ *   Принимает: текущий элемент, индекс, весь массив. Возвращает boolean.
+ * @returns {*|undefined} Первый найденный элемент или undefined
+ */
 function find(array, callback) {
+  if (!Array.isArray(array)) {
+    throw new TypeError("Первый аргумент должен быть массивом");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("Второй аргумент должен быть функцией");
+  }
+
   for (let i = 0; i < array.length; i++) {
     if (callback(array[i], i, array)) {
       return array[i];
     }
   }
   return undefined;
-} 
+}
 
-const numbersfind = [1, 2, 3, 4, 5];
-const firstEven = find(numbersfind, (element) => element % 2 === 0);
-console.log(firstEven);
-
-//5
-console.log("5some:");
+/**
+ * Проверяет, существует ли хотя бы один элемент, удовлетворяющий условию.
+ * Прекращает обход при первом совпадении.
+ * @param {Array} array - Исходный массив
+ * @param {function(*, number, Array): boolean} callback - Функция-предикат.
+ *   Принимает: текущий элемент, индекс, весь массив. Возвращает boolean.
+ * @returns {boolean} true если хотя бы один элемент удовлетворяет условию
+ */
 function some(array, callback) {
-    
-    for (let i = 0; i < array.length; i++) {
+  if (!Array.isArray(array)) {
+    throw new TypeError("Первый аргумент должен быть массивом");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("Второй аргумент должен быть функцией");
+  }
 
-        if (callback(array[i], i, array)) {
-            return true; 
-        }
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i], i, array)) {
+      return true;
     }
-
-    return false;
+  }
+  return false;
 }
-const numbersome = [1, 2, 3, 4, 5];
-const hasEven = some(numbersome, (element) => element % 2 === 0);
-console.log(hasEven); 
 
-//6
-console.log("6every:");
+/**
+ * Проверяет, удовлетворяют ли все элементы массива заданному условию.
+ * Прекращает обход при первом несоответствии.
+ * @param {Array} array - Исходный массив
+ * @param {function(*, number, Array): boolean} callback - Функция-предикат.
+ *   Принимает: текущий элемент, индекс, весь массив. Возвращает boolean.
+ * @returns {boolean} true если все элементы удовлетворяют условию
+ */
 function every(array, callback) {
-   
-    for (let i = 0; i < array.length; i++) {
-      
-        if (!callback(array[i], i, array)) {
-            return false;
-        }
+  if (!Array.isArray(array)) {
+    throw new TypeError("Первый аргумент должен быть массивом");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("Второй аргумент должен быть функцией");
+  }
+
+  for (let i = 0; i < array.length; i++) {
+    if (!callback(array[i], i, array)) {
+      return false;
     }
-   
-    return true;
+  }
+  return true;
 }
-const numbersevery = [2, 4, 6];
-const allEven = every(numbersevery, (element) => element % 2 === 0);
+
+/**
+ * Последовательно обрабатывает элементы массива, накапливая результат в аккумуляторе.
+ * @param {Array} array - Исходный массив
+ * @param {function(*, *, number, Array): *} callback - Функция-редьюсер.
+ *   Принимает: аккумулятор, текущий элемент, индекс, весь массив. Возвращает новый аккумулятор.
+ * @param {*} [initialValue] - Начальное значение аккумулятора (необязательно).
+ *   Если не передано, используется первый элемент массива.
+ * @returns {*} Итоговое значение аккумулятора. undefined если массив пуст и initialValue не передан.
+ */
+function reduce(array, callback, initialValue) {
+  if (!Array.isArray(array)) {
+    throw new TypeError("Первый аргумент должен быть массивом");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("Второй аргумент должен быть функцией");
+  }
+
+  const hasInitial = arguments.length >= 3;
+
+  if (array.length === 0 && !hasInitial) {
+    return undefined;
+  }
+
+  let accumulator = hasInitial ? initialValue : array[0];
+  const startIndex = hasInitial ? 0 : 1;
+
+  for (let i = startIndex; i < array.length; i++) {
+    accumulator = callback(accumulator, array[i], i, array);
+  }
+
+  return accumulator;
+}
+
+
+console.log("=== printArray ===");
+printArray(["a", "b", "c"]);
+
+console.log("\n=== printArray1 ===");
+printArray1(["a", "b", "c"]);
+
+console.log("\n=== forEach ===");
+forEach([1, 2, 3], (element, index) => {
+  console.log(`Element: ${element}, Index: ${index}`);
+});
+
+console.log("\n=== map ===");
+const squared = map([1, 2, 3], (el) => el * el);
+console.log(squared); // [1, 4, 9]
+
+console.log("\n=== filter ===");
+const evens = filter([1, 2, 3, 4, 5], (el) => el % 2 === 0);
+console.log(evens); // [2, 4]
+
+console.log("\n=== find ===");
+const firstEven = find([1, 2, 3, 4, 5], (el) => el % 2 === 0);
+console.log(firstEven); // 2
+
+console.log("\n=== some ===");
+const hasEven = some([1, 2, 3], (el) => el % 2 === 0);
+console.log(hasEven); // true
+
+console.log("\n=== every ===");
+const allEven = every([2, 4, 6], (el) => el % 2 === 0);
 console.log(allEven); // true
 
-//7
-console.log("7reduce:");
-function reduce(array, callback, initialValue) {
-    const hasInitialValue = arguments.length > 2; // проверяем, передан ли initialValue
-    if (array.length === 0 && !hasInitialValue) {
-        return undefined; // если массив пуст и нет начального значения
-    }
+console.log("\n=== reduce ===");
+const sum = reduce([1, 2, 3, 4, 5], (acc, el) => acc + el, 0);
+console.log(sum); // 15
 
-    let accumulator;
-    let startIndex;
+const sumNoInit = reduce([1, 2, 3, 4, 5], (acc, el) => acc + el);
+console.log(sumNoInit); // 15
 
-    if (hasInitialValue) {
-        accumulator = initialValue;
-        startIndex = 0;
-    } else {
-        accumulator = array[0];
-        startIndex = 1;
-    }
-
-    for (let i = startIndex; i < array.length; i++) {
-        accumulator = callback(accumulator, array[i], i, array);
-    }
-
-    return accumulator;
-}
-const numbersreduce = [1, 2, 3, 4, 5];
-
-const sum = reduce(numbersreduce , (accumulator, element) => accumulator + element, 0);
-
-console.log(sum); 
+const emptyReduce = reduce([], (acc, el) => acc + el);
+console.log(emptyReduce); // undefined
