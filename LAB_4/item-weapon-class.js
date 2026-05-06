@@ -95,3 +95,5 @@ inventory.weapon?.use(); // ничего не происходит
 inventory.weapon = new Weapon("Iron Mace", 4.0, "common", 8, 50);
 inventory.weapon?.use();
 console.log(`Durability: ${inventory.weapon?.durability}`);
+
+lozhka= new Weapon("Lozhka", 0.5, "legendary", 1, 100);

@@ -1,4 +1,4 @@
-```markdown
+
 # Лабораторная работа: Наследование в JavaScript (прототипный подход vs классы ES6)
 
 ## 1. Цель работы
@@ -290,5 +290,3 @@ inventory.weapon?.use();
 inventory.weapon = new Weapon("Iron Mace", 4.0, "common", 8, 50);
 inventory.weapon?.use();
 console.log(`Durability: ${inventory.weapon?.durability}`);
-```
-```

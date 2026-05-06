@@ -1,0 +1,278 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.clickable-title {
+  cursor: pointer;
+  transition: color 0.3s;
+  user-select: none;
+}
+
+.clickable-title:hover {
+  color: #3498db;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.1s, opacity 0.3s;
+}
+
+.btn-primary {
+  background: #3498db;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+}
+
+.btn-success {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #219a52;
+}
+
+.btn-secondary {
+  background: #95a5a6;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn-secondary:hover {
+  background: #7f8c8d;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #3498db;
+  color: #3498db;
+}
+
+.btn-outline:hover {
+  background: #3498db;
+  color: white;
+}
+
+.btn-outline.active {
+  background: #3498db;
+  color: white;
+}
+
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters input,
+.filters select {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  flex: 1 1 200px;
+}
+
+.form-panel {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  animation: fadeIn 0.3s ease;
+}
+
+.form-panel h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.book-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.book-card h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.book-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.date-info {
+  font-size: 0.75rem;
+  color: #888;
+  font-style: italic;
+  margin: 2px 0;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: inline-block;
+  width: fit-content;
+}
+
+.status.read {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.unread {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Стили для активной кнопки статуса */
+.status-toggle-btn {
+  border: none;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: fit-content;
+  transition: opacity 0.2s, transform 0.1s;
+  background: #ecf0f1; /* запасной фон */
+  color: #333;
+}
+
+.status-toggle-btn.read {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-toggle-btn.unread {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-toggle-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.status-toggle-btn:active {
+  transform: scale(0.98);
+}
+
+.book-card button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-right: 5px;
+  transition: background 0.2s;
+}
+
+.edit-btn {
+  background: #f39c12;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #e67e22;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 40px;
+}
+
+.error-container {
+  color: #e74c3c;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.error-container p {
+  margin: 3px 0;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .filters {
+    flex-direction: column;
+  }
+}
